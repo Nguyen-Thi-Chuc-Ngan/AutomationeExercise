@@ -74,12 +74,37 @@ describe('Register' , ()=>{
 
         cy.contains(' Logged in as ' + username).should('be.visible')
 
-        // cy.get('a[href="/delete_account"]').click()
+        cy.get('a[href="/delete_account"]').click()
 
-        // cy.contains('Account Deleted!').should('be.visible')
-        // cy.get('a[data-qa="continue-button"]').click()
+        cy.contains('Account Deleted!').should('be.visible')
+        cy.get('a[data-qa="continue-button"]').click()
 
     })
 
-   
+   it('Register with existing email', ()=>{
+        // Tạo email random
+        const email = 'testuser1745465282598@example.com';
+        const password = '1235678';
+        const username = "TestUser";
+    
+        
+       // Lanch browser
+       cy.visit('http://automationexercise.com')
+       // Navigate to urlurl
+       cy.url().should('include', 'automationexercise.com')
+       // Home page visiblevisible
+       cy.get('body').should('be.visible')
+       //Click Signup / LoginLogin
+       cy.contains('Signup / Login').click()
+       // New User Signup! visiblevisible
+       cy.contains('New User Signup!').should('be.visible')
+       
+       cy.get('input[data-qa="signup-name"]').type('username')
+       cy.get('input[data-qa="signup-email"]').type(email)
+
+       cy.get('button[data-qa="signup-button"]').click()
+
+       cy.contains('Email Address already exist!').should('be.visible')
+
+   })
 })
