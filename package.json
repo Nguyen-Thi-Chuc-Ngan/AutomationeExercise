@@ -4,7 +4,9 @@
   "main": "index.js",
   "scripts": {
     "cy:open": "cypress open",
-    "cypress-clould": "npx cypress run --record --key 924ee6cd-fe31-423f-b3b6-fb6c7ca05c56"
+    "cypress-clould": "npx cypress run --record --key 924ee6cd-fe31-423f-b3b6-fb6c7ca05c56",
+    "start": "my-server -p 3030",
+    "cy:run": "cypress run"
   },
   "keywords": [],
   "author": "",
@@ -14,6 +16,7 @@
     "@shelex/cypress-allure-plugin": "^2.41.1",
     "cypress": "^14.3.1",
     "cypress-file-upload": "^5.0.8",
-    "cypress-xpath": "^2.0.1"
+    "cypress-xpath": "^2.0.1",
+    "start-server-and-test": "^2.0.11"
   }
 }
