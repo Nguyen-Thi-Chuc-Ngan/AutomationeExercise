@@ -3,6 +3,7 @@ const allureWriter = require('@shelex/cypress-allure-plugin/writer');
 const fs = require('fs'); 
 
 module.exports = defineConfig({
+  projectId: 'g9c5cm',
   e2e: {
     setupNodeEvents(on, config) {
       on('after:spec', (spec, results) => {
@@ -24,7 +25,7 @@ module.exports = defineConfig({
       return config;
     },
 
-    projectId: "111111", // Thay đổi ID dự án của bạn
+    projectId: "g9c5cm", // Thay đổi ID dự án của bạn
     specPattern: "cypress/e2e/**/*.cy.{js,jsx,ts,tsx}", // Mặc định test file
     baseUrl: "https://www.automationexercise.com/", // Địa chỉ của ứng dụng
     supportFile: "cypress/support/e2e.js", // Đường dẫn tới file hỗ trợ
