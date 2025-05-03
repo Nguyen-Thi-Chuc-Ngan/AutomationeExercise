@@ -1,6 +1,6 @@
 name: Cypress Tests
 
-on: [push, pull_request]
+on: [push]
 
 jobs:
   cypress-run:
@@ -28,12 +28,13 @@ jobs:
       - name: Cypress run
         uses: cypress-io/github-action@v6
         with:
-          start: npm start
-          wait-on: 'http://localhost:3000'  # Đảm bảo server đã sẵn sàng
+          wait-on: ''
+          start: ''
           record: true  # Ghi lại kết quả vào Cypress Cloud
           parallel: true  # Chạy test song song
         env:
+          CYPRESS_baseUrl: 'https://www.automationexercise.com/'
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          COMMIT_INFO_MESSAGE: ${{ github.event.pull_request.title }}  # Tiêu đề của pull request
-          COMMIT_INFO_SHA: ${{ github.event.pull_request.head.sha }}  # SHA của pull request
+          COMMIT_INFO_MESSAGE: ${{ github.event.pull_request.title || github.event.head_commit.message }}
+          COMMIT_INFO_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
