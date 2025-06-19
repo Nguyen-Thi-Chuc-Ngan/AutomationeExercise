@@ -1,11 +1,7 @@
 describe('Search Product', ()=>{
     it('Search for a product', ()=>{
-        // Launch browser
-        cy.visit('http://automationexercise.com')
-        // Navigate to url
-        cy.url().should('include', 'automationexercise.com')
-        // Home page visible
-        cy.get('body').should('be.visible')
+        cy.visitHomePage()
+
         
         // Click on Products
         cy.contains('Products').click()

@@ -1,11 +1,8 @@
 describe('Verify All Products and product detail page', ()=>{
     it('Verify All Products', ()=>{
         // Lanch browser
-        cy.visit('http://automationexercise.com')
-        // Navigate to urlurl
-        cy.url().should('include', 'automationexercise.com')
-        // Home page visiblevisible
-        cy.get('body').should('be.visible')
+        cy.visitHomePage()
+
         //Click Products
         cy.contains('Products').click()
         // All Products visiblevisible
