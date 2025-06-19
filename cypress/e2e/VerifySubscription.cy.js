@@ -1,12 +1,7 @@
 describe('Verify Subscription', ()=>{
     it('Subscribe to newsletter', ()=>{
-        // Launch browser
-        cy.visit('http://automationexercise.com')
-        // Navigate to url
-        cy.url().should('include', 'automationexercise.com')
-        // Home page visible
-        cy.get('body').should('be.visible')
-        
+        cy.visitHomePage()
+
         cy.scrollTo('bottom')
 
         cy.contains('Subscription').should('be.visible')

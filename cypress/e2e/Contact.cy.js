@@ -8,9 +8,8 @@ describe('', ()=>{
     const filePath = 'text.txt';
 
     it('Contact Us Form', ()=>{
-        cy.visit('https://www.automationexercise.com/')
-        cy.url().should('include', 'automationexercise.com')
-        cy.get('body').should('be.visible')
+        cy.visitHomePage()
+
         cy.contains('Contact us').click()
         cy.contains('Get In Touch').should('be.visible')
 
