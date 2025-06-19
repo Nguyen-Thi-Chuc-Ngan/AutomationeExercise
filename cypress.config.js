@@ -1,24 +1,34 @@
 const { defineConfig } = require("cypress");
 const allureWriter = require('@shelex/cypress-allure-plugin/writer');
+const { downloadFile } = require('cypress-downloadfile/lib/addPlugin');
+
+
 const fs = require('fs'); 
 
 module.exports = defineConfig({
   projectId: 'g9c5cm',
   e2e: {
     setupNodeEvents(on, config) {
+
+       on('task', {
+        downloadFile,
+      });
+
+
       on('after:spec', (spec, results) => {
         if (results && results.video) {
-          // Kiểm tra xem có thất bại hoặc thử lại nào không
+
           const failures = results.tests.some((test) =>
+
             test.attempts.some((attempt) => attempt.state === 'failed')
           );
           if (!failures) {
-            // Nếu không có thất bại hoặc thử lại, xóa video
+            
             fs.unlinkSync(results.video);
           }
         }
       });
-      
+
       // Ghi Allure nếu dùng
       allureWriter(on, config);
       
@@ -32,5 +42,7 @@ module.exports = defineConfig({
     screenshotOnRunFailure: true, // Mặc định là true
     videoCompression: 32, // Có thể thay đổi thành 0-100 để điều chỉnh mức độ nén
     video: true, // Bật hoặc tắt quay video test
+
+    downloadsFolder: 'cypress/downloads', 
   },
 })

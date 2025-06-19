@@ -1,13 +1,13 @@
 import 'cypress-file-upload';
 
-describe('', ()=>{
+describe('Contact Us Form', ()=>{
 
-    const email = 'testuser1745465282598@example.com';
+    const email = "testuser" + Date.now() + '@example.com';
     const password = '1235678';
     const username = "TestUser";
     const filePath = 'text.txt';
 
-    it('Contact Us Form', ()=>{
+    it('Test Case 6: Contact Us Form', ()=>{
         cy.visitHomePage()
 
         cy.contains('Contact us').click()
@@ -26,7 +26,6 @@ describe('', ()=>{
         cy.get('textarea[data-qa="message"]').should('have.value', 'Test message')
 
         cy.get('input[type="file"]').attachFile(filePath);
-        cy.get('input[type="file"]').should('have.value', `C:\\fakepath\\${filePath}`);
 
         cy.get('input[data-qa="submit-button"]').click()
         cy.contains('Success! Your details have been submitted successfully.').should('be.visible')

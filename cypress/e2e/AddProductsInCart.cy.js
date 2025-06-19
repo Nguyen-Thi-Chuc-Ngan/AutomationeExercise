@@ -1,31 +1,29 @@
-describe('Add Products In Cart', ()=>{
-    it('Add products to cart', ()=>{
-        // Launch browser
-        cy.visitHomePage()
+describe("Add Products In Cart", () => {
+    const index_product = 0;
+    const expect_price = "Rs. 500";
+    const quantity = "1";
+    const index_product_2 = 1;
+    const expect_price_2 = "Rs. 400";
+    const quantity_2 = "1";
 
-        cy.contains('Products').should('be.visible').click()
+  it("Test Case 12: Add Products in Cart", () => {
+    // Launch browser
+    cy.visitHomePage();
 
-        cy.get('.product-image-wrapper').should('be.visible').first().trigger('mouseover')
-        cy.get('.product-image-wrapper').first().contains('Add to cart').click()
+    cy.contains("Products").should("be.visible").click();
 
-        cy.get('.btn-success').should('be.visible', 'Continue Shopping').click()
+    cy.addProductToCart(index_product, expect_price, quantity);
 
-        cy.get('.product-image-wrapper').should('be.visible').eq(1).trigger('mouseover')
-        cy.get('.product-image-wrapper').eq(1).contains('Add to cart').click()
+    cy.get(".btn-success").should("be.visible", "Continue Shopping").click();
 
-        cy.contains('View Cart').should('be.visible').click()
-        
-        cy.get('#cart_info_table tbody tr').should('have.length', 2)
+    cy.addProductToCart(index_product_2, expect_price_2, quantity_2);
 
-        cy.get('#product-1 .cart_price p').should('have.text', 'Rs. 500')
-        cy.get('#product-2 .cart_price p').should('have.text', 'Rs. 400')
+    cy.contains("View Cart").should("be.visible").click();
+
+    cy.verifyProductToCart(index_product, expect_price, quantity);
+
+    cy.verifyProductToCart(index_product_2, expect_price_2, quantity_2);
 
 
-        cy.get('#product-1 .cart_quantity .disabled').should('have.text', '1')
-        cy.get('#product-2 .cart_quantity .disabled').should('have.text', '1')
-
-        cy.get('#product-1 .cart_total_price').should('have.text', 'Rs. 500')
-        cy.get('#product-2 .cart_total_price').should('have.text', 'Rs. 400')
-
-    })
-})
+  });
+});

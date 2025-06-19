@@ -1,13 +1,8 @@
 describe('Verify All Products and product detail page', ()=>{
-    it('Verify All Products', ()=>{
+    it('Test Case 8: Verify All Products and product detail page', ()=>{
         // Lanch browser
         cy.visitHomePage()
-
-        //Click Products
-        cy.contains('Products').click()
-        // All Products visiblevisible
-        cy.url().should('include', 'products')
-        cy.contains('All Products').should('be.visible')
+        cy.visitProductPage()
 
         cy.get('.product-image-wrapper').should('be.visible')
         cy.contains('View Product').first().click()
