@@ -1,4 +1,7 @@
-Cypress.Commands.add('registerUser', (email, password, username) => {
+Cypress.Commands.add('registerUser', (email, username, password, firstName, lastName, company, address1, address2, country, state, city, zipcode, mobile) => {
+    cy.contains("Signup / Login").click();
+    cy.contains("New User Signup!").should("be.visible");
+    
     cy.get('input[data-qa="signup-name"]').type(username)
     cy.get('input[data-qa="signup-name"]').should('have.value', username)
     cy.get('input[data-qa="signup-email"]').type(email)
@@ -21,35 +24,35 @@ Cypress.Commands.add('registerUser', (email, password, username) => {
     cy.get('#newsletter').check()
     cy.get('#optin').check()
 
-    cy.get('input[data-qa="first_name"]').type('John')  // First name
-    cy.get('input[data-qa="first_name"]').should('have.value', 'John')
+    cy.get('input[data-qa="first_name"]').type(firstName)  // First name
+    cy.get('input[data-qa="first_name"]').should('have.value', firstName)
 
-    cy.get('input[data-qa="last_name"]').type('Doe')   // Last name
-    cy.get('input[data-qa="last_name"]').should('have.value', 'Doe')
+    cy.get('input[data-qa="last_name"]').type(lastName)   // Last name
+    cy.get('input[data-qa="last_name"]').should('have.value', lastName)
 
-    cy.get('input[data-qa="company"]').type('Example Inc.') // Company
-    cy.get('input[data-qa="company"]').should('have.value', 'Example Inc.')
+    cy.get('input[data-qa="company"]').type(company) // Company
+    cy.get('input[data-qa="company"]').should('have.value', company)
 
-    cy.get('#address1').type('123 Main St') // Address
-    cy.get('#address1').should('have.value', '123 Main St')
+    cy.get('#address1').type(address1) // Address
+    cy.get('#address1').should('have.value', address1)
 
-    cy.get('#address2').type('Apt 4B') // Address
-    cy.get('#address2').should('have.value', 'Apt 4B')
+    cy.get('#address2').type(address2) // Address
+    cy.get('#address2').should('have.value', address2)
 
-    cy.get('select[data-qa="country"]').select('India')
-    cy.get('select[data-qa="country"]').should('have.value','India')
+    cy.get('select[data-qa="country"]').select(country)
+    cy.get('select[data-qa="country"]').should('have.value',country)
 
-    cy.get('input[data-qa="state"]').type('California') // State
-    cy.get('input[data-qa="state"]').should('have.value', 'California')
+    cy.get('input[data-qa="state"]').type(state) // State
+    cy.get('input[data-qa="state"]').should('have.value', state)
 
-    cy.get('input[data-qa="city"]').type('Los Angeles') // City
-    cy.get('input[data-qa="city"]').should('have.value', 'Los Angeles')
+    cy.get('input[data-qa="city"]').type(city) // City
+    cy.get('input[data-qa="city"]').should('have.value', city)
 
-    cy.get('input[data-qa="zipcode"]').type('90001')  // Zipcode
-    cy.get('input[data-qa="zipcode"]').should('have.value', '90001')
+    cy.get('input[data-qa="zipcode"]').type(zipcode)  // Zipcode
+    cy.get('input[data-qa="zipcode"]').should('have.value', zipcode)
 
-    cy.get('input[data-qa="mobile_number"]').type('1234567890')  // Mobile Number
-    cy.get('input[data-qa="mobile_number"]').should('have.value', '1234567890')
+    cy.get('input[data-qa="mobile_number"]').type(mobile)  // Mobile Number
+    cy.get('input[data-qa="mobile_number"]').should('have.value', mobile)
 
     cy.get('button[data-qa="create-account"]').click()
      
@@ -79,6 +82,5 @@ Cypress.Commands.add('login', (email, password) => {
     cy.get('input[data-qa="login-password"]').should('have.value', password)
   
     cy.get('button[data-qa="login-button"]').click()
-  
   })
   

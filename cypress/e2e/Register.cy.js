@@ -1,39 +1,77 @@
-describe('Register' , ()=>{
-    const email = 'testuser' + Date.now() + '@example.com';
-    const username = "TestUser";
-    const password = '1235678'; 
-    it('Register new user', ()=>{
+const userInfo = require("../fixtures/userInfo");
 
-        // Lanch browser
-        cy.visitHomePage()
+describe("Register", () => {
+  const {
+    email,
+    password,
+    username,
+    firstName,
+    lastName,
+    company,
+    address1,
+    address2,
+    country,
+    state,
+    city,
+    zipcode,
+    mobile,
+  } = userInfo;
 
-        //Click Signup / LoginLogin
-        cy.contains('Signup / Login').click()
-        // New User Signup! visiblevisible
-        cy.contains('New User Signup!').should('be.visible')
-        
-        cy.registerUser(email, username, password)
+  it("Test Case 1: Register User", () => {
+    // Lanch browser
+    cy.visitHomePage();
 
-        // cy.deleteAccount()
+    cy.registerUser(
+      email,
+      username,
+      password,
+      firstName,
+      lastName,
+      company,
+      address1,
+      address2,
+      country,
+      state,
+      city,
+      zipcode,
+      mobile
+    );
 
-    })
+    cy.deleteAccount()
+  });
 
-   it('Register with existing email', ()=>{
-   
-       // Lanch browser
-       cy.visitHomePage()
+  it("Test Case 5: Register User with existing email", () => {
+    // Lanch browser
+    cy.visitHomePage();
 
-       //Click Signup / LoginLogin
-       cy.contains('Signup / Login').click()
-       // New User Signup! visiblevisible
-       cy.contains('New User Signup!').should('be.visible')
-       
-       cy.get('input[data-qa="signup-name"]').type(username)
-       cy.get('input[data-qa="signup-email"]').type(email)
+    cy.registerUser(
+      email,
+      username,
+      password,
+      firstName,
+      lastName,
+      company,
+      address1,
+      address2,
+      country,
+      state,
+      city,
+      zipcode,
+      mobile
+    );
 
-       cy.get('button[data-qa="signup-button"]').click()
+    cy.contains('Logout').click();
 
-       cy.contains('Email Address already exist!').should('be.visible')
+    //Click Signup / LoginLogin
+    cy.contains("Signup / Login").click();
+    // New User Signup! visiblevisible
+    cy.contains("New User Signup!").should("be.visible");
 
-   })
-})
+    cy.get('input[data-qa="signup-name"]').type(username);
+    cy.get('input[data-qa="signup-email"]').type(email);
+
+    cy.get('button[data-qa="signup-button"]').click();
+
+    cy.contains("Email Address already exist!").should("be.visible");
+  });
+});

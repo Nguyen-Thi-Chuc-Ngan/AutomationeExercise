@@ -1,21 +1,20 @@
 /// <reference types="cypress" />
-describe('View Category Page', () => {
+describe('Test Case 18: View Category Products', () => {
 
     it('View Category Page', () => {
-            cy.visitHomePage();
+        cy.visitHomePage();
 
-            // Click on Products
-            cy.contains('Products').click();
+        cy.get('.left-sidebar .panel-group').should('be.visible');
+           
+        cy.contains('Women').click();
+        cy.contains('Dress').click();
+        cy.get('.features_items h2').should('contain', 'Women - Dress Products');
+        
 
-            // Verify the category page is displayed
-            cy.get('.features_items').should('be.visible');
+        cy.contains('Men').click();
+        cy.contains('Tshirts').click();
 
-            // Verify the category title
-            cy.contains('All Products').should('be.visible');
+        cy.get('.features_items h2').should('be.visible').and('contain.text', 'Men - Tshirts Products');
+    });    
 
-            // Verify the products are displayed
-            cy.get('.product-image-wrapper').should('have.length.greaterThan', 0);
-        });    
-
-    
 });

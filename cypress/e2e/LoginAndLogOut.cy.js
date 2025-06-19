@@ -1,45 +1,51 @@
-describe('Login and Logout', ()=>{
-    let email;
-    const password = '1235678';
-    const username = "TestUser";
+const userInfo = require("../fixtures/userInfo");
 
-    before(() => {
-        email = 'testuser' +  Date.now() + '@example.com';
-        cy.visitHomePage()
-        cy.contains('Signup / Login').click()
-        cy.contains('New User Signup!').should('be.visible')
-        cy.registerUser(email, password, username)
-        cy.contains('Logout').click()
-    });
+describe("Login and Logout", () => {
+  const {
+    email,
+    password,
+    username,
+    firstName,
+    lastName,
+    company,
+    address1,
+    address2,
+    country,
+    state,
+    city,
+    zipcode,
+    mobile,
+  } = userInfo;
 
-    it('Login User with correct email and password', ()=>{
-        // Lanch browser
-        cy.login(email, password)
+  before(() => {
+    cy.visitHomePage();
+    cy.registerUser(email, username, password, firstName, lastName, company, address1, address2, country, state, city, zipcode, mobile);
+    cy.contains("Logout").click();
+  });
 
-        cy.contains(' Logged in as ' + username).should('be.visible')
-        cy.deleteAccount()
-    })
+  it("Test Case 2: Login User with correct email and password", () => {
+    // Lanch browser
+    cy.login(email, password);
 
-    it('Login User with incorrect email and password', ()=>{
-        cy.visitHomePage()
-        cy.contains('Signup / Login').click()
-        cy.contains('New User Signup!').should('be.visible')
-        cy.registerUser(email, password, username)
-        cy.contains('Logout').click()
-        cy.login('wrong_' + email, password)
-        cy.contains('Your email or password is incorrect!').should('be.visible')
-    })
+    cy.contains(" Logged in as " + username).should("be.visible");
+    cy.deleteAccount();
+  });
 
-    it('Logout', ()=>{
-        cy.visitHomePage()
-        cy.login(email, password)
-        cy.wait(1000)
-        
-        cy.contains(' Logged in as ' + username).should('be.visible')
-        
-        cy.contains('Logout').click()
-        cy.url().should('include', "/login")
+  it("Test Case 3: Login User with incorrect email and password", () => {
+    cy.visitHomePage();
+    cy.registerUser(email, username, password, firstName, lastName, company, address1, address2, country, state, city, zipcode, mobile);
+    cy.contains("Logout").click();
+    cy.login("wrong_" + email, password);
+    cy.contains("Your email or password is incorrect!").should("be.visible");
+  });
 
-    })
+  it("Test Case 4: Logout User", () => {
+    cy.visitHomePage();
+    cy.login(email, password);
 
-})
+    cy.contains(" Logged in as " + username).should("be.visible");
+
+    cy.contains("Logout").click();
+    cy.url().should("include", "/login");
+  });
+});

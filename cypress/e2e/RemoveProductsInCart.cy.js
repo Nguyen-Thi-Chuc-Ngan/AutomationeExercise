@@ -1,9 +1,9 @@
 describe('Remove Products in Cart', () => {
-    it('Remove products from cart', () => {
+    it('Test Case 17: Remove Products From Cart', () => {
         cy.visitHomePage();
 
         // Add products to cart
-        cy.addProductsToCart();
+        cy.addProductFristToCart();
 
         // Navigate to cart
         cy.contains('Cart').click();

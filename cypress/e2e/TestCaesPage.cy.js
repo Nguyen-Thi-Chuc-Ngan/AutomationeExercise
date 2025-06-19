@@ -1,5 +1,5 @@
 describe('Test Cases Page', ()=>{
-    it('Test Cases Page', ()=>{
+    it('Test Case 7: Verify Test Cases Page', ()=>{
         cy.visitHomePage()
 
         //Click Test Cases
