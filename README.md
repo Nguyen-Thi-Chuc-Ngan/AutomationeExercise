@@ -22,7 +22,7 @@ Toàn bộ test case trong dự án này được lấy từ:
 
 ## 🛠️ Công cụ sử dụng
 
-- **Selenium WebDriver** / **Cypress** / **Postman** / **JMeter**
+- **Cypress** / **Postman** / **JMeter**
 - Ngôn ngữ: **JavaScript**, **Java**
 - Quản lý mã nguồn: **Git**, **GitHub**
 - Môi trường phát triển: **VSCode**, **Postman**
